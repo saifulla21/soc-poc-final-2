@@ -1,6 +1,4 @@
 --find-links wheelhouse
-gevent==1.2.2
-greenlet==0.4.12
 certifi==2017.7.27.1
 click==6.7
 enum34==1.1.6
