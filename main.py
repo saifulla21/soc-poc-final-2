@@ -16,11 +16,11 @@ def test():
 
 @socketio.on('myevent')
 def test_message(message):
-    emit('myresponse', {'data': 'got it!' + message})
+    emit('myresponse', {'data': message})
     
 @socketio.on('chat message')
 def test_message(message):
-    emit('chat message', message)
+    emit('chat message', 'server response')
 
 if __name__ == '__main__':
     socketio.run(app)
