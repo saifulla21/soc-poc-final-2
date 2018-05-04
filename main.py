@@ -16,7 +16,7 @@ def test():
 
 @socketio.on('myevent')
 def test_message(message):
-    emit('myresponse', {'data': 'got it!'})
+    emit('myresponse', {'data': 'got it!' + message})
     
 @socketio.on('chat message')
 def test_message(message):
