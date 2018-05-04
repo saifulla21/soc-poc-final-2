@@ -15,22 +15,23 @@ def index():
     
 @app.route('/test')
 def test():
-    server = 'cas-sqldb-dev.database.windows.net'
-    user = 'casroot'
-    password = 'db123$%^'
+#     server = 'cas-sqldb-dev.database.windows.net'
+#     user = 'casroot'
+#     password = 'db123$%^'
 
-    conn = pymssql.connect(server, user, password, "cas-sqldev-tenant-44")
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM sites where product_type = %s','XenDesktop')
-    row = cursor.fetchone()
-    str_my = ''
-    while row:    
-        str_my = str_my + row[0] + ' , '
-        print("tenant_ID=%s, Name=%s" % (row[0], row[1]))
-        row = cursor.fetchone()
-    print str_my
-    conn.close()
-    return str_my
+#     conn = pymssql.connect(server, user, password, "cas-sqldev-tenant-44")
+#     cursor = conn.cursor()
+#     cursor.execute('SELECT * FROM sites where product_type = %s','XenDesktop')
+#     row = cursor.fetchone()
+#     str_my = ''
+#     while row:    
+#         str_my = str_my + row[0] + ' , '
+#         print("tenant_ID=%s, Name=%s" % (row[0], row[1]))
+#         row = cursor.fetchone()
+#     print str_my
+#     conn.close()
+#     return str_my
+    return 'test'
 
 @socketio.on('myevent')
 def test_message(message):
