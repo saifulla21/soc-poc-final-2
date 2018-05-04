@@ -18,7 +18,7 @@ def index():
     
 @app.route('/test')
 def test():
-   intense_cpu()
+   return intense_cpu()
 #     server = 'cas-sqldb-dev.database.windows.net'
 #     user = 'casroot'
 #     password = 'db123$%^'
@@ -36,7 +36,7 @@ def test():
 #     conn.close()
 #     return str_my
     
- def intense_cpu:
+def intense_cpu():
     x = 1
     threshold = randint(1, 10)
     start = int(time.time())
