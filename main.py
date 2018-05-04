@@ -42,7 +42,6 @@ def intense_cpu():
     start = int(time.time())
     while True:
         delta = int(time.time()) - start
-        print delta
         if (delta > threshold):
             break
         x= x*x
