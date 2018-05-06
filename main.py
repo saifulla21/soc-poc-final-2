@@ -18,19 +18,19 @@ def index():
     
 @app.route('/test')
 def test():
-   return  db_connect()
+   return  intense_cpu()
     
     
-# def intense_cpu():
-#     x = 1
-#     threshold = randint(1, 10)
-#     start = int(time.time())
-#     while True:
-#         delta = int(time.time()) - start
-#         if (delta > threshold):
-#             break
-#         x= x*x
-#     return 'threshold : '+str(threshold)
+def intense_cpu():
+    x = 1
+    threshold = randint(1, 10)
+    start = int(time.time())
+    while True:
+        delta = int(time.time()) - start
+        if (delta > threshold):
+            break
+        x= x*x
+    return 'threshold : '+str(threshold)
 
 def db_connect():
     server = '10.62.136.217'
@@ -51,7 +51,7 @@ def db_connect():
 
 @socketio.on('myevent')
 def test_message(message):
-    resp = db_connect()
+    resp = intense_cpu()
     emit('myresponse', {'data': message, 'resp': resp})
     
 @socketio.on('chat message')
