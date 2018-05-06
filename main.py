@@ -44,14 +44,14 @@ def db_connect():
     str_my = ''
     while row:    
         str_my = str_my + row[0] + ' , '
-        print("tenant_ID=%s, Name=%s" % (row[0], row[1]))
+#         print("tenant_ID=%s, Name=%s" % (row[0], row[1]))
         row = cursor.fetchone()
     conn.close()
     return str_my
 
 @socketio.on('myevent')
 def test_message(message):
-    resp = intense_cpu()
+    resp = db_connect()
     emit('myresponse', {'data': message, 'resp': resp})
     
 @socketio.on('chat message')
