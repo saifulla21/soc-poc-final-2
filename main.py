@@ -55,8 +55,13 @@ def db_connect():
 @socketio.on('myevent')
 def test_message(message):
     logging.info('socket request received on myevent')
-    resp = db_connect()
-    emit('myresponse', {'data': message, 'resp': resp})
+    try:
+        resp = db_connect()
+        emit('myresponse', {'data': message, 'resp': resp})
+    except Exception, e:
+        logging.exception(e)
+        emit('myresponse', {'data': message, 'resp': 'error'})
+    
     
 @socketio.on('chat message')
 def test_message(message):
