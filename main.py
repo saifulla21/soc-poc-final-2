@@ -33,11 +33,8 @@ def intense_cpu():
     return 'threshold : '+str(threshold)
 
 def db_connect():
-    server = '10.62.136.217'
-    user = 'sa'
-    password = 'Passw0rd'
-
-    conn = pymssql.connect(server, user, password, "cas-sqldev-tenant-007")
+    
+    conn = pymssql.connect(server = '10.62.136.217', user = 'sa', password = 'Passw0rd', database = 'cas-sqldev-tenant-007')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM sites where product_type = %s','XenDesktop')
     row = cursor.fetchone()
