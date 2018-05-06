@@ -34,7 +34,7 @@ def intense_cpu():
 
 def db_connect():
     
-    conn = pyodbc.connect('DRIVER={ODBC Driver 13 for SQL Server};SERVER = '10.62.136.217'; DATABASE = 'cas-sqldev-tenant-007';UID = 'sa'; PWD = 'Passw0rd')
+    conn = pyodbc.connect('DRIVER={ODBC Driver 13 for SQL Server};SERVER = "10.62.136.217"; DATABASE = "cas-sqldev-tenant-007";UID = "sa"; PWD = "Passw0rd")
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM sites where product_type = %s','XenDesktop')
     row = cursor.fetchone()
