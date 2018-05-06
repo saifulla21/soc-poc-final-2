@@ -51,7 +51,7 @@ def db_connect():
 
 @socketio.on('myevent')
 def test_message(message):
-    resp = intense_cpu()
+    resp = db_connect()
     emit('myresponse', {'data': message, 'resp': resp})
     
 @socketio.on('chat message')
