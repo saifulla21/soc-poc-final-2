@@ -18,34 +18,36 @@ def index():
     
 @app.route('/test')
 def test():
-   return intense_cpu()
-#     server = 'cas-sqldb-dev.database.windows.net'
-#     user = 'casroot'
-#     password = 'db123$%^'
-
-#     conn = pymssql.connect(server, user, password, "cas-sqldev-tenant-44")
-#     cursor = conn.cursor()
-#     cursor.execute('SELECT * FROM sites where product_type = %s','XenDesktop')
-#     row = cursor.fetchone()
-#     str_my = ''
-#     while row:    
-#         str_my = str_my + row[0] + ' , '
-#         print("tenant_ID=%s, Name=%s" % (row[0], row[1]))
-#         row = cursor.fetchone()
-#     print str_my
-#     conn.close()
-#     return str_my
+   return  db_connect()
     
-def intense_cpu():
-    x = 1
-    threshold = randint(1, 10)
-    start = int(time.time())
-    while True:
-        delta = int(time.time()) - start
-        if (delta > threshold):
-            break
-        x= x*x
-    return 'threshold : '+str(threshold)
+    
+# def intense_cpu():
+#     x = 1
+#     threshold = randint(1, 10)
+#     start = int(time.time())
+#     while True:
+#         delta = int(time.time()) - start
+#         if (delta > threshold):
+#             break
+#         x= x*x
+#     return 'threshold : '+str(threshold)
+
+def db_connect():
+    server = '10.62.136.217'
+    user = 'sa'
+    password = 'Passw0rd'
+
+    conn = pymssql.connect(server, user, password, "cas-sqldev-tenant-007")
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM sites where product_type = %s','XenDesktop')
+    row = cursor.fetchone()
+    str_my = ''
+    while row:    
+        str_my = str_my + row[0] + ' , '
+        print("tenant_ID=%s, Name=%s" % (row[0], row[1]))
+        row = cursor.fetchone()
+    conn.close()
+    return str_my
 
 @socketio.on('myevent')
 def test_message(message):
