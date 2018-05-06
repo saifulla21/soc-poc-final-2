@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 from os import getenv
-import pymssql
+import pyodbc
 import time
 from random import randint
 
@@ -34,7 +34,7 @@ def intense_cpu():
 
 def db_connect():
     
-    conn = pymssql.connect(server = '10.62.136.217', user = 'sa', password = 'Passw0rd', database = 'cas-sqldev-tenant-007')
+    conn = pyodbc.connect('DRIVER={ODBC Driver 13 for SQL Server};SERVER = '10.62.136.217'; DATABASE = 'cas-sqldev-tenant-007';UID = 'sa'; PWD = 'Passw0rd')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM sites where product_type = %s','XenDesktop')
     row = cursor.fetchone()
