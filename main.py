@@ -58,7 +58,7 @@ def test_message(message):
     try:
         resp = db_connect()
         emit('myresponse', {'data': message, 'resp': resp})
-    except Exception, e:
+    except Exception as e:
         logging.exception(e)
         emit('myresponse', {'data': message, 'resp': 'error'})
     
