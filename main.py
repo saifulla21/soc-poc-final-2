@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 from os import getenv
-import pypyodbc as pyodbc
+import pyodbc
 import time
 import logging
 from random import randint
@@ -43,13 +43,10 @@ def db_connect():
     cursor = conn.cursor()
     logging.info('connected to database')
     cursor.execute('SELECT * FROM sites where product_type = %s','XenDesktop')
-    row = cursor.fetchone()
+   
     str_my = ''
-    while row:    
-        str_my = str_my + row[0] + ' , '
-        logging.info('row set', row[0])
-#         print("tenant_ID=%s, Name=%s" % (row[0], row[1]))
-        row = cursor.fetchone()
+    for row in cursor.fetchall():
+        str_my = str_my + row[0]
     conn.close()
     return str_my
 
