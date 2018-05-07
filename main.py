@@ -59,10 +59,11 @@ def test_message(message):
     try:
         resp = db_connect()
         emit('myresponse', {'data': message, 'resp': resp})
+        socketio.sleep(0)
     except Exception as e:
         logging.exception(e)
         emit('myresponse', {'data': message, 'resp': 'error'})
-    
+        socketio.sleep(0)
     
 @socketio.on('chat message')
 def test_message(message):
