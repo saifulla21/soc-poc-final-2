@@ -42,7 +42,7 @@ def db_connect():
     conn = pyodbc.connect(r'DRIVER={SQL Server};SERVER=10.62.136.217;DATABASE=cas-sqldev-tenant-007;UID=sa;PWD=Passw0rd')
     cursor = conn.cursor()
     logging.info('connected to database')
-    cursor.execute('SELECT * FROM sites where product_type = %s','XenDesktop')
+    cursor.execute('SELECT * FROM sites where product_type = ?','XenDesktop')
    
     str_my = ''
     for row in cursor.fetchall():
