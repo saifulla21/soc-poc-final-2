@@ -53,7 +53,7 @@ def db_connect():
 @socketio.on('myevent')
 def test_message(message):
     logging.info('socket request received on myevent')
-    for key, value in request.headers.iteritems():
+    for key, value in request.headers.items():
         logging.info('key:value'+key + ':'+value)
     try:
         resp = db_connect()
