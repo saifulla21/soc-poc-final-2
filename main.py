@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 from os import getenv
 import pymssql
@@ -52,7 +52,7 @@ def db_connect():
 
 @socketio.on('myevent')
 def test_message(message):
-    logging.info('socket request received on myevent')
+    logging.info('socket request received on myevent'+request.headers.get('Authorization'))
     try:
         resp = db_connect()
         emit('myresponse', {'data': message, 'resp': resp})
