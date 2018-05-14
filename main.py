@@ -52,7 +52,9 @@ def db_connect():
 
 @socketio.on('myevent')
 def test_message(message):
-    logging.info('socket request received on myevent'+request.headers.get('Authorization'))
+    logging.info('socket request received on myevent')
+    for key, value in request.headers.iteritems():
+        logging.info('key:value'+key + ':'+value)
     try:
         resp = db_connect()
         emit('myresponse', {'data': message, 'resp': resp})
