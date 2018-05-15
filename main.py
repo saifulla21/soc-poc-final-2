@@ -7,6 +7,7 @@ import logging
 from random import randint
 
 
+
 logging.basicConfig(filename='soc-poc.log',level=logging.DEBUG,format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -70,4 +71,5 @@ def test_message(message):
     emit('chat message', 'server response')
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, message_queue = 'amqps://RootManageSharedAccessKey:2zdSbHRP6QGFZi7U0oSECqp0gZxH8Lzxokl12wYzXXc=@soc-poc-service-bus.servicebus.windows.net/sample_queue')
+
