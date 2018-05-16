@@ -5,6 +5,7 @@ import pymssql
 import time
 import logging
 from random import randint
+from datetime import datetime
 
 
 
@@ -52,17 +53,20 @@ def db_connect():
     return str_my
 
 @socketio.on('myevent')
-def test_message(message):
+def test_message(json):
     logging.info('socket request received on myevent')
+    json['data']['received_message'] = str(datetime.now().time())
     for key, value in request.headers.items():
         logging.info('key:value'+key + ':'+value)
     try:
         resp = db_connect()
-        emit('myresponse', {'data': message, 'resp': resp})
+        json['data']['emitting_message'] = str(datetime.now().time())
+        emit('myresponse', {'data': json, 'resp': resp})
         socketio.sleep(0)
     except Exception as e:
         logging.exception(e)
-        emit('myresponse', {'data': message, 'resp': 'error'})
+        json['data']['emitting_message'] = str(datetime.now().time())
+        emit('myresponse', {'data': json, 'resp': 'error'})
         socketio.sleep(0)
     
 @socketio.on('chat message')
@@ -71,5 +75,5 @@ def test_message(message):
     emit('chat message', 'server response')
 
 if __name__ == '__main__':
-    socketio.run(app, message_queue = 'amqps://RootManageSharedAccessKey:2zdSbHRP6QGFZi7U0oSECqp0gZxH8Lzxokl12wYzXXc=@soc-poc-service-bus.servicebus.windows.net/sample_queue')
+    socketio.run(app)
 
