@@ -55,17 +55,17 @@ def db_connect():
 @socketio.on('myevent')
 def test_message(json):
     logging.info('socket request received on myevent')
-    json['data']['received_message'] = str(datetime.now().time())
+    json['received_message'] = time.time()
     for key, value in request.headers.items():
         logging.info('key:value'+key + ':'+value)
     try:
         resp = db_connect()
-        json['data']['emitting_message'] = str(datetime.now().time())
+        json['emitting_message'] = time.time()
         emit('myresponse', {'data': json, 'resp': resp})
         socketio.sleep(0)
     except Exception as e:
         logging.exception(e)
-        json['data']['emitting_message'] = str(datetime.now().time())
+        json['emitting_message'] = time.time()
         emit('myresponse', {'data': json, 'resp': 'error'})
         socketio.sleep(0)
     
